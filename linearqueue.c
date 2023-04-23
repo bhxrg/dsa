@@ -1,116 +1,85 @@
+//Elementary Queue operations
 #include<stdio.h>
-#define max 10
-int i, rear = -1, front = 0, op, option, insertions, deletions, q[max], size;
+#define size 10
+void operatons();
 void create();
-void insert();
 void delete();
 void display();
-//void shift();
-void main(){
-    create();
-    do{
-        do{
-            printf("choose among the foll: 1.insert, 2.delete, 3.display\n");
-            scanf("%d", &option);
-        }while(option>3);
+int q[size],rear=-1,front=0,option,data,ele;
 
+void main()
+{
+    operations();
+}
 
+void operations()
+{
+    printf("\n");
+    printf("Enter the number:\n");
+    printf("1. Insert\n");
+    printf("2. Remove\n");
+    printf("3. Display\n");
+    printf("4. Exit\n");
+    printf("Enter your choice:\n");
+    scanf("%d",&option);
     switch(option)
     {
-        case 1:
-        {
-            insert();
-        }
-        break;
-        case 2:
-        {
-            if(rear == 0)
-            delete();
-            else{
-                printf("enter number of deletions: \n");
-                scanf("%d", &deletions);
-                for(int i = 0; i < deletions; i++)
-                    delete();
-                //display();
-            }
-        }
-        break;
-        case 3:
-            display();
-        break;
+        case 1: insert();
+        case 2: delete();
+        case 3: display();
+        case 4: exit(1);
+        default: printf("Enter a valid expression!\n");
+                operations();
     }
-    printf("hit 1 to continue:\n");
-    scanf("%d", &op);
-    }while(op==1);
 }
 
-void create(){
-    do{
-        printf("enter size of queue: \n");
-        scanf("%d", &size);
-    }while(size>=max);
-    printf("queue created of size %d\n", size);
-    printf("rear: %d \nsize: %d \nfront: %d\n", rear, size ,front);
-}
-
-void insert(){
-    int data;
-    if(rear == size -1)
+void insert()
+{
+    if(rear == size-1)
     {
-        printf("queue is full\n");
-        return;
+        printf("Queue is full!\n");
+        operations();
     }
-    do{
-        printf("enter number of insertions: \n");
-        scanf("%d", &insertions);
-        if((insertions + rear)> size-1 )
-            printf("too many insertions\n");
-    }while((insertions+rear)>size-1);
-    while(insertions--)
+    else
     {
-        printf("enter integer element: \n");
-        scanf("%d", &data);
+        printf("Enter the element:\n");
+        scanf("%d",&data);
         q[++rear] = data;
+        operations();
     }
-    //printf("rear: %d \nsize: %d \nfront: %d\n",rear, size, front);
 }
 
-void delete(){
-    int ele;
-    if(rear==-1)
+void delete()
+{
+    if(rear == front)
     {
-        printf("queue is empty\n");
-        return;
+        printf("Queue is empty!\n");
+        operations();
     }
-    ele = q[front];
-
-    front++;
-    //size++;
-
-    printf("deleted element: %d \n", ele);
-    //printf("rear: %d \nsize: %d \nfront: %d\n",rear, size, front);
-
-    //shift();
-    //rear--;
-
-}
-
-void display(){
-    if(rear == -1)
+    else
     {
-        printf("queue is empty\n");
-        return;
+        ele = q[front];
+        printf("Deleted element is %d\n",ele);
+        front++;
+        operations();
     }
-    printf("elements are:\n");
-    for(i = front; i <= rear; i++)
-        printf("%d\t", q[i]);
-    printf("\n");
-    //printf("rear: %d \nsize: %d \nfront: %d\n", rear, size, front);
 }
 
-/*
-void shift(){
-    for(int i = 0; i< rear; i++)
-    q[i] = q[i+1];
+void display()
+{
+    if(rear == front-1)
+    {
+        printf("Queue is empty!\n");
+        operations();
+    }
+    else
+    {
+        printf("Elements of queue are:\n");
+        for(int i=front;i<=rear;i++)
+        {
+            printf("%d   ",q[i]);
+        }
+        printf("\n");
+        operations();
+    }
 }
-*/
