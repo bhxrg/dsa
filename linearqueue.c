@@ -1,7 +1,7 @@
 //Elementary Queue operations
 #include<stdio.h>
 #define size 10
-void operatons();
+void operations();
 void create();
 void delete();
 void display();
